@@ -49,6 +49,12 @@ dependencies {
     val bstats = "org.bstats:bstats-sponge:1.7"
     implementation(bstats)
     kapt(bstats)
+
+    val laven = "me.settingdust:laven-sponge"
+    api(laven)
+    shadow(laven) {
+        exclude("org.spongepowered")
+    }
 }
 
 tasks {
