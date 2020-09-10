@@ -1,0 +1,3 @@
+rootProject.name = "sponge-template"
+
+include "laven-sponge", "laven-sponge:laven"
