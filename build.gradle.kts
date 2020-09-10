@@ -3,8 +3,6 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
 
-    `maven-publish`
-
     id("com.github.johnrengelman.shadow") version "6.0.0"
     id("org.jmailen.kotlinter") version "3.0.2"
     id("net.kyori.blossom")
@@ -65,24 +63,6 @@ tasks {
         artifacts.archives(archiveFile) { builtBy(shadowJar) }
     }
     build { dependsOn("formatKotlinMain") }
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/SettingDust/more-placeholder")
-            credentials {
-                username = project.findProperty("gpr.user") as? String ?: System.getenv("GPR_USER")
-                password = project.findProperty("gpr.key") as? String ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-    publications {
-        create<MavenPublication>("gpr") {
-            from(components["java"])
-        }
-    }
 }
 
 blossom {
