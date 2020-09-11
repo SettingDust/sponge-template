@@ -5,7 +5,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
         classpath("com.github.jengelman.gradle.plugins:shadow:6.0.0")
         classpath("org.jmailen.gradle:kotlinter-gradle:3.0.2")
     }
