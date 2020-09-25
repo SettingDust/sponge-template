@@ -69,13 +69,17 @@ dependencies {
 
     def bstats = "org.bstats:bstats-sponge:1.7"
     implementation bstats
+    shadow bstats
     kapt bstats
 
-    def laven = project("laven-sponge")
-    api laven
-    shadow(laven) {
-        exclude group: "org.spongepowered"
+    def lavenSponge = project("laven-sponge")
+    api lavenSponge
+    shadow(lavenSponge) {
+        exclude group: "org.spongepowered", module: "spongeapi"
+        exclude group: "org.jetbrains.kotlin"
     }
+
+    api project("laven-sponge:laven")
 }
 
 blossom {
@@ -99,6 +103,11 @@ jar {
 shadowJar {
     archiveClassifier.set("")
     configurations = [project.configurations.shadow]
-    exclude("META-INF/**")
+    exclude "META-INF/**", "org/intellij/lang/annotations/**", "org/jetbrains/annotations/**"
+
+    relocate "ninja.leaping.configurate.kotlin", "${project.getGroup()}.runtime.configurate.kotlin"
+    relocate "kotlin", "${project.getGroup()}.runtime.kotlin"
+    relocate "org.bstats", "${project.getGroup()}.runtime.bstats"
+    relocate "me.settingdust.laven", "${project.getGroup()}.runtime.laven"
 }
 build { dependsOn("formatKotlinMain") }
